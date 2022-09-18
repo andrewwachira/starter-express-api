@@ -23,7 +23,7 @@ try{
     const order = await Order.findOne({mpesaIdentifier:CheckoutRequestID})
     const update = {MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc }
     console.log(update);
-    await Order.updateOne({mpesaPaymentResult:update})
+    await order.updateOne({mpesaPaymentResult:update})
 
     let message={
       "ResponseCode": "00000000",
