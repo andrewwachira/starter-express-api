@@ -18,10 +18,12 @@ app.get("/ipn",(req,res)=>{
 })
 app.post("/safCallback",async(req,res)=>{
 try{
-    const {body:{stkCallback:{MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc}}} = JSON.parse(req.body)
+    
+    const {Body:{stkCallback:{MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc}}} = req.body;
     const order = await Order.findOne({mpesaIdentifier:CheckoutRequestID})
     const update = {MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc }
-    await order.updateone({mpesaPaymentResult:update})
+    console.log(update);
+    await Order.updateOne({mpesaPaymentResult:update})
 
     let message={
       "ResponseCode": "00000000",
