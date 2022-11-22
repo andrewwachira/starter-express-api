@@ -20,11 +20,12 @@ app.post("/safCallback",async(req,res)=>{
 try{
     
     const {Body:{stkCallback:{MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc}}} = req.body;
-    const order = await Order.findOne({mpesaIdentifier:CheckoutRequestID})
-    const update = {MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc }
-    console.log(update);
-    await order.updateOne({mpesaPaymentResult:update})
-
+    if(MerchantRequestID){
+        const order = await Order.findOne({mpesaIdentifier:CheckoutRequestID})
+        const update = {MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc }
+        console.log(update);
+        await order.updateOne({mpesaPaymentResult:update})
+    }
     let message={
       "ResponseCode": "00000000",
       "ResponseDesc": "success"
