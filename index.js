@@ -22,7 +22,12 @@ try{
     const {Body:{stkCallback:{MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc}}} = req.body;
     if(MerchantRequestID){
         const order = await Order.findOne({mpesaIdentifier:CheckoutRequestID})
-        const update = {MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc }
+        console.log("*************Order from DB**************")
+        console.log(order)
+        if(order.mpesaIdentifier === CheckoutRequestID){
+              const update = {MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc }
+        }
+        console.log("**************Payload from Safaricom**************")
         console.log(update);
         await order.updateOne({mpesaPaymentResult:update})
     }
