@@ -25,11 +25,12 @@ try{
         console.log("*************Order from DB**************")
         console.log(order)
         if(order.mpesaIdentifier === CheckoutRequestID){
-              const update = {MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc }
+            const update = {MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc }
+            console.log("**************Payload from Safaricom**************")
+            console.log(update);
+            await order.updateOne({mpesaPaymentResult:update})
         }
-        console.log("**************Payload from Safaricom**************")
-        console.log(update);
-        await order.updateOne({mpesaPaymentResult:update})
+        
     }
     let message={
       "ResponseCode": "00000000",
