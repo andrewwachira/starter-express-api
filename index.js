@@ -12,10 +12,16 @@ app.use(express.json())
 app.get("/",(req,res)=>{
     res.send("Heellooo there")
 })
-app.get("/ipn",(req,res)=>{
-    console.log(req.body)
-     return  res.json({"message":"Data received" })
+app.post("/ipn",(req,res)=>{
+    const {OrderTrackingId,OrderNotificationType,OrderMerchantReference} = req.body;
+    await db.connect();
+    const orderToUpdate = await Order.findById(OrderMerchantReference);
+    const update = {OrderTrackingId,OrderNotificationType,OrderMerchantReference}
+    await order.updateOne({pesapalIPNData: update);
+    await db.disconnect();
+    return  res.json({"message":"Data received" })
 })
+
 app.post("/safCallback",async(req,res)=>{
 try{
     
