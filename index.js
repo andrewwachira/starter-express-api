@@ -12,7 +12,7 @@ app.use(express.json())
 app.get("/",(req,res)=>{
     res.send("Heellooo there")
 })
-app.post("/ipn",(req,res)=>{
+app.post("/ipn",async (req,res)=>{
     const {OrderTrackingId,OrderNotificationType,OrderMerchantReference} = req.body;
     await db.connect();
     const orderToUpdate = await Order.findById(OrderMerchantReference);
