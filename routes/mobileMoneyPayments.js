@@ -1,4 +1,4 @@
 const router = require("express").Router();
 const makeMpesaPayments = require("../controllers/mpesa");
-router.post("/ipn", makeMpesaPayments);
+router.post("/safCallback", makeMpesaPayments);
 module.exports = router;
