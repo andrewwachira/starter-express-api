@@ -12,4 +12,4 @@ const makePesapalPayment  = async(req,res)=>{
     }
 }
 
-module.exports = makePesapalPayment
+module.exports = makePesapalPayment;
