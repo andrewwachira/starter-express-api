@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose =require("mongoose");
 
 const cateringOrderSchema = new mongoose.Schema(
     {
@@ -63,4 +63,4 @@ const cateringOrderSchema = new mongoose.Schema(
     }
 ) 
 const CateringOrder = mongoose.models.CateringOrder || mongoose.model("CateringOrder",cateringOrderSchema);
-export default CateringOrder;
+module.exports =  CateringOrder;

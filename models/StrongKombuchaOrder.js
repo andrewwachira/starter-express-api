@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose =require("mongoose");
 
 const strongKombuchaOrderSchema = new mongoose.Schema(
     {
@@ -62,4 +62,4 @@ const strongKombuchaOrderSchema = new mongoose.Schema(
     }
 ) 
 const StrongKombuchaOrder = mongoose.models.StrongKombuchaOrder || mongoose.model("StrongKombuchaOrder",strongKombuchaOrderSchema);
-export default StrongKombuchaOrder;
+module.exports =  StrongKombuchaOrder;
