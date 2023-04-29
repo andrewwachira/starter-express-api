@@ -9,7 +9,7 @@ const makeMpesaPayments = async (req,res)=>{
             const order = await Order.findOne({mpesaIdentifier:CheckoutRequestID})
             const cateringOrder = await CateringOrder.findOne({mpesaIdentifier:CheckoutRequestID})
             const strongKombuchaOrder = await StrongKombuchaOrder.findOne({mpesaIdentifier:CheckoutRequestID})
-            const theOrder = [order,cateringOrder,strongKombuchaOrder].find(theOne => Object.keys(theOne).length > 0); 
+            const theOrder = [order,cateringOrder,strongKombuchaOrder].find(theOne => theOne !== null && theOne !== undefined); 
 
             console.log("*************Order from DB**************")
             if(theOrder.mpesaIdentifier === CheckoutRequestID){
