@@ -61,5 +61,5 @@ const strongKombuchaOrderSchema = new mongoose.Schema(
         timestamps:true
     }
 ) 
-const StrongKombuchaOrder = mongoose.models.StrongKombuchaOrder || mongoose.model("Strong-Kombucha-Order",strongKombuchaOrderSchema);
+const StrongKombuchaOrder = mongoose.models.StrongKombuchaOrder || mongoose.model("StrongKombuchaOrder",strongKombuchaOrderSchema);
 export default StrongKombuchaOrder;
