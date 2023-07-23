@@ -43,11 +43,8 @@ const makeMpesaPayments = async (req,res)=>{
         }
         // await db.connect();
         const order = await Order.findById(data.attributes.metadata.reference);
-        await order.updateOne(
-            {
-                mpesaPaymentResult: update
-            }
-        )
+        order.mpesaPaymentResult = update;
+        await order.save();
         res.status(200);
     }catch(error){
         console.log(error.message)
