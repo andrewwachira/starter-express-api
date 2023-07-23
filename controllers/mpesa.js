@@ -23,8 +23,7 @@ const makeMpesaPayments = async (req,res)=>{
         //   "ResponseDesc": "success"
         // }
         // res.json(message);
-        let {data} = req.body;
-        data = JSON.parse(data);
+        const {data} = JSON.parse(req.body);
         const update = {
             kopokopoApiAttributes: {
                 id: data.id,
