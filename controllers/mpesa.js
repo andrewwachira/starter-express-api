@@ -4,7 +4,6 @@ const StrongKombuchaOrder  = require("../models/StrongKombuchaOrder");
 
 const makeMpesaPayments = async (req,res)=>{
     try{
-        console.log(req.body)
         // const {Body:{stkCallback:{MerchantRequestID,CheckoutRequestID,ResultCode,ResultDesc}}} = req.body;
         // if(MerchantRequestID){
         //     const order = await Order.findOne({mpesaIdentifier:CheckoutRequestID})
@@ -19,11 +18,40 @@ const makeMpesaPayments = async (req,res)=>{
         //         await theOrder.updateOne({mpesaPaymentResult:update})
         //     }
         // }
-        let message={
-          "ResponseCode": "00000000",
-          "ResponseDesc": "success"
+        // let message={
+        //   "ResponseCode": "00000000",
+        //   "ResponseDesc": "success"
+        // }
+        // res.json(message);
+        let {data} = req.body;
+        data = JSON.parse(data);
+        const update = {
+            kopokopoApiAttributes: {
+                id: data.id,
+                type: data.type,
+                initiationTime: data.attributes.initiation_time,
+                status: data.attributes.status,
+              },
+              transactionAttributes: {
+                reference: data.attributes.event.resource.reference,
+                originationTime: data.attributes.event.resource.origination_time,
+                amount: data.attributes.event.resource.amount,
+                tillNumber: data.attributes.event.resource.till_number,
+                senderFirstName: data.attributes.event.resource.sender_first_name,
+                senderLastName: data.attributes.event.resource.sender_last_name,
+                status: data.attributes.event.resource.status,
+              },
         }
-        res.json(message);
+        await db.connect();
+        const order = await Order.findById(data.metadata.reference);
+        order.updateOne(
+            {
+               $set:{
+                mpesaPaymentResult: update
+               }
+            }
+        )
+        res.status(200);
     }catch(error){
         console.log(error.message)
     }
