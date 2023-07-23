@@ -45,9 +45,7 @@ const makeMpesaPayments = async (req,res)=>{
         const order = await Order.findById(data.attributes.metadata.reference);
         await order.updateOne(
             {
-               $set:{
                 mpesaPaymentResult: update
-               }
             }
         )
         res.status(200);
