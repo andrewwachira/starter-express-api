@@ -43,7 +43,7 @@ const makeMpesaPayments = async (req,res)=>{
         }
         // await db.connect();
         const order = await Order.findById(data.attributes.metadata.reference);
-        order.updateOne(
+        await order.updateOne(
             {
                $set:{
                 mpesaPaymentResult: update
