@@ -42,7 +42,7 @@ const makeMpesaPayments = async (req,res)=>{
               },
         }
         // await db.connect();
-        const order = await Order.findById(data.metadata.reference);
+        const order = await Order.findById(data.attributes.metadata.reference);
         order.updateOne(
             {
                $set:{
