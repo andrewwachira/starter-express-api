@@ -43,15 +43,12 @@ const makeMpesaPayments = async (req,res)=>{
         }
 
         const order = await Order.findById(data.attributes.metadata.reference);
-        console.log(order);
-        order.mpesaPaymentResult = update;
-        const result = await order.updateOne({
-            $set:{
-                mpesaPaymentResult:update
+        await order.updateOne(
+            {
+                mpesaPaymentResult: update
             }
-        });
-        console.log(result);
-        res.status(200);
+        )
+        res.status(200).send();
     }catch(error){
         console.log(error.message)
     }
