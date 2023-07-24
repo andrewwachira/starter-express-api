@@ -41,10 +41,16 @@ const makeMpesaPayments = async (req,res)=>{
                 status: data.attributes.event.resource.status,
               },
         }
-        console.log(update);
+
         const order = await Order.findById(data.attributes.metadata.reference);
+        console.log(order);
         order.mpesaPaymentResult = update;
-        await order.save();
+        const result = await order.updateOne({
+            $set:{
+                mpesaPaymentResult:update
+            }
+        });
+        console.log(result);
         res.status(200);
     }catch(error){
         console.log(error.message)
